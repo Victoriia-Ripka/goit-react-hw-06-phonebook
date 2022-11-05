@@ -1,10 +1,10 @@
 import React from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik } from 'formik';
 import { nanoid } from 'nanoid';
 import * as Yup from 'yup';
-import { Label, DeleteBtn } from './styles.styled';
+import { Label, DeleteBtn, InputField, InputForm, InputMessage } from './styles.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from '../redux/contactsSlice';
+import { addContact, getContacts } from '../redux/contactsSlice';
 
 const SignupSchema = Yup.object().shape({
   name: Yup.string()
@@ -19,7 +19,7 @@ const SignupSchema = Yup.object().shape({
 
 export const MyContactForm = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.contacts.contacts);
+  const contacts = useSelector(getContacts);
   const initialValues = { name: '', number: '' };
 
   const handleSubmit = (values, { resetForm }) => {
@@ -42,10 +42,10 @@ export const MyContactForm = () => {
       validationSchema={SignupSchema}
     >
       {props => (
-        <Form>
+        <InputForm>
           <Label>
             Name
-            <Field
+            <InputField
               type="text"
               value={props.values.name}
               name="name"
@@ -53,12 +53,11 @@ export const MyContactForm = () => {
               title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
               required
             />
-            <ErrorMessage name="name" />
+            <InputMessage name="name" />
           </Label>
-          <br />
           <Label>
             Number
-            <Field
+            <InputField
               type="tel"
               value={props.values.number}
               name="number"
@@ -66,11 +65,10 @@ export const MyContactForm = () => {
               title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
               required
             />
-            <ErrorMessage name="number" />
+            <InputMessage name="number" />
           </Label>
-          <br />
           <DeleteBtn type="Submit">Add contact</DeleteBtn>
-        </Form>
+        </InputForm>
       )}
     </Formik>
   );

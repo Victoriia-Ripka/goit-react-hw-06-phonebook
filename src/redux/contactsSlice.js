@@ -1,7 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-
-
 const init = [
   { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
   { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
@@ -36,3 +34,8 @@ export const contactsSlice = createSlice({
 export const { addContact, deleteContact, filterContacts } =
   contactsSlice.actions;
 export const contactsReducer = contactsSlice.reducer;
+
+
+//selectors 
+export const getFilter = state => state.contacts.filter
+export const getContacts = state => state.contacts.contacts 

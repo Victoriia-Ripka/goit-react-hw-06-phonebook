@@ -6,11 +6,11 @@ import {
   DeleteBtn,
 } from './styles.styled';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteContact } from '../redux/contactsSlice';
+import { deleteContact, getContacts, getFilter } from '../redux/contactsSlice';
 
 export const ListOfContacts = () => {
-  const contacts = useSelector(state => state.contacts.contacts);
-  const filterContacts = useSelector(state => state.contacts.filter);
+  const contacts = useSelector(getContacts);
+  const filterContacts = useSelector(getFilter);
 
   const dispatch = useDispatch();
 
