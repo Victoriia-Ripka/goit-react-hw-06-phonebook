@@ -24,7 +24,6 @@ export const MyContactForm = () => {
 
   const handleSubmit = (values, { resetForm }) => {
     const newContact = { id: nanoid(), ...values };
-    resetForm();
     const isContactInList = contacts.find(
       item => item.name.toLocaleLowerCase() === newContact.name.toLocaleLowerCase()
     );
@@ -32,6 +31,7 @@ export const MyContactForm = () => {
       alert(`${newContact.name} is already in contacts`);
     } else {
       dispatch(addContact(newContact));
+      resetForm();
     }
   };
 
